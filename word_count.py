@@ -1,4 +1,5 @@
 from sys import argv
+from operator import itemgetter
 
 script, filename = argv
 
@@ -8,18 +9,20 @@ passage = text.read()
 passage = passage.lower()
 words = passage.split()
 
-
-
 word_dict = {}
 
 for word in words:
 
     word = word.strip("!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~")
+ 
+    word_dict[word] = word_dict.get(word, 0) + 1
 
-    if word in word_dict:
-        word_dict[word] += 1
-    else:
-        word_dict[word] = 1
+counts = [(word,count) for word, count in word_dict.items()]
+counts.sort()
+sorted_word = sorted(counts, key=itemgetter(1), reverse = True)
 
-for item, count in word_dict.iteritems():
-    print item + ": ", count
+
+for w, c in sorted_word:
+    print w, ": ", c
+
+
