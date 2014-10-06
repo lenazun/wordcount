@@ -2,11 +2,11 @@ from sys import argv
 
 script, filename = argv
 
-punctuation = ('.', ',', '?', ':', ";", '"', "'")
+punctuation = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
 
 text = open(filename)
 passage = text.read()
-passage = passage.strip(punctuation)
+passage = passage.lower()
 words = passage.split()
 
 word_dict = {}
